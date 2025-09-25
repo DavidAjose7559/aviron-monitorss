@@ -2,12 +2,17 @@ name: Run Aviron Monitors (Biweekly Monday 9am Toronto)
 
 on:
   # Fire at both 13:00 and 14:00 UTC every Monday.
-  # 13:00 UTC == 9:00 AM Toronto during DST
+  # 13:00 UTC == 9:00 AM Toronto during Daylight Time
   # 14:00 UTC == 9:00 AM Toronto during Standard Time
   schedule:
     - cron: "0 13 * * 1"
     - cron: "0 14 * * 1"
   workflow_dispatch:
+    inputs:
+      force:
+        description: "Run now and ignore the Monday/9am/biweekly gates"
+        required: false
+        default: "false"
 
 permissions:
   contents: write
@@ -15,20 +20,28 @@ permissions:
 jobs:
   run-scripts:
     runs-on: ubuntu-latest
-    env:
-      # Monday before the next presentation: Oct 6, 2025
-      REFERENCE_MONDAY: "2025-10-06"
-      TZ: "America/Toronto"
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Local-time + biweekly checks
+      - name: Local-time + biweekly checks (with manual override)
         id: gate
         shell: bash
+        env:
+          FORCE: ${{ github.event.inputs.force }}
+          # Monday before the next Tuesday presentation (Oct 7, 2025) is Oct 6, 2025
+          REFERENCE_MONDAY: "2025-10-06"
+          TZ: "America/Toronto"
         run: |
-          # 1) Must be 9:00 local (America/Toronto)
+          # Manual override: run regardless of time/parity
+          if [ "${FORCE}" = "true" ]; then
+            echo "Manual FORCE run requested. Skipping time/parity gates."
+            echo "run=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Must be 9:00 local (America/Toronto)
           NOW_LOCAL_HOUR=$(date +%H)
           if [ "$NOW_LOCAL_HOUR" -ne 09 ]; then
             echo "Not 9am Toronto (hour=$NOW_LOCAL_HOUR). Skipping."
@@ -36,7 +49,7 @@ jobs:
             exit 0
           fi
 
-          # 2) Biweekly parity since REFERENCE_MONDAY
+          # Biweekly parity since REFERENCE_MONDAY
           REF="$REFERENCE_MONDAY"
           TODAY=$(date +%Y-%m-%d)
           REF_S=$(date -d "$REF" +%s)
@@ -83,6 +96,7 @@ jobs:
           NORMALIZE_REGEX: '[^0-9\.]'
           STRIP_UTM: "1"
           MIN_PRICE_FLOOR: "400"
+
           NEWS_LOOKBACK_DAYS: "14"
         run: python run_all.py
 
