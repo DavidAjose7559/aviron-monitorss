@@ -1,4 +1,4 @@
-import os, csv, json, re, requests, smtplib
+import os, csv, json, re, requests, smtplib, time, random
 from collections import defaultdict
 from datetime import datetime, timezone, timedelta
 from bs4 import BeautifulSoup
@@ -11,7 +11,13 @@ from urllib.parse import urlsplit, urlunsplit, parse_qsl, urlencode
 # =======================
 load_dotenv()
 
-HEADERS = {"User-Agent": "Mozilla/5.0 (Aviron-Price-Monitor)"}
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36 Aviron-Price-Monitor",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Cache-Control": "no-cache",
+    "Pragma": "no-cache",
+}
 HISTORY_FILE = "history.json"
 
 # Email
@@ -38,6 +44,11 @@ STRIP_UTM = os.getenv("STRIP_UTM", "1") == "1"
 
 # Optional: floor for final fallback (avoid picking monthly fees etc.)
 MIN_PRICE_FLOOR = float(os.getenv("MIN_PRICE_FLOOR", "400"))
+
+# Polite crawling / retry
+_LAST_FETCH = {}            # domain -> last fetch time
+MIN_DOMAIN_GAP = 3.0        # seconds between same-domain requests
+MAX_TRIES = 5               # retries on 429/5xx
 
 
 # =======================
@@ -66,6 +77,38 @@ def send_email(subject, body):
 # =======================
 # Utilities
 # =======================
+def _throttle(url: str):
+    dom = urlsplit(url).netloc
+    now = time.time()
+    last = _LAST_FETCH.get(dom, 0)
+    gap = now - last
+    if gap < MIN_DOMAIN_GAP:
+        time.sleep(MIN_DOMAIN_GAP - gap)
+    _LAST_FETCH[dom] = time.time()
+
+
+def http_get_with_backoff(url: str):
+    delay = 2.0
+    for attempt in range(1, MAX_TRIES + 1):
+        _throttle(url)
+        resp = requests.get(url, headers=HEADERS, timeout=30)
+        if resp.status_code == 429:
+            wait = delay + random.uniform(0, 1.5)
+            print(f"[throttle] 429 from {url} — retry {attempt}/{MAX_TRIES} after {wait:.1f}s")
+            time.sleep(wait)
+            delay = min(delay * 2, 30)
+            continue
+        if 500 <= resp.status_code < 600:
+            wait = delay + random.uniform(0, 1.0)
+            print(f"[retry] {resp.status_code} from {url} — retry {attempt}/{MAX_TRIES} after {wait:.1f}s")
+            time.sleep(wait)
+            delay = min(delay * 2, 30)
+            continue
+        resp.raise_for_status()
+        return resp
+    raise ValueError(f"Too Many Requests / server errors after {MAX_TRIES} tries for {url}")
+
+
 def norm_price(text, regex=DEFAULT_REGEX):
     if text is None:
         return None
@@ -92,8 +135,7 @@ def normalize_url(u: str) -> str:
 
 def extract_price(url, selector, attr="inner_text", regex=DEFAULT_REGEX, product_hint=None):
     """Extract a price using selector -> JSON-LD -> Peloton-aware fallback -> final largest-$ fallback."""
-    resp = requests.get(url, headers=HEADERS, timeout=30)
-    resp.raise_for_status()
+    resp = http_get_with_backoff(url)
     html = resp.text
 
     # BeautifulSoup with lxml fallback
@@ -121,7 +163,6 @@ def extract_price(url, selector, attr="inner_text", regex=DEFAULT_REGEX, product
                     if "price" in obj and obj["price"]:
                         return obj["price"]
                     if "offers" in obj:
-                        # offers can be dict or list
                         p = find_price(obj["offers"])
                         if p is not None:
                             return p
@@ -147,7 +188,6 @@ def extract_price(url, selector, attr="inner_text", regex=DEFAULT_REGEX, product
     if "onepeloton.com" in url and product_hint:
         text = re.sub(r"\s+", " ", html)
         ph = product_hint.lower()
-        # choose the right pattern for the hinted product
         if "bike+" in ph or "bike plus" in ph:
             pat = r"Get the Peloton Bike\+.*?Based on a price of\s*\$([0-9][\d,\.]+)"
         elif "bike" in ph:
