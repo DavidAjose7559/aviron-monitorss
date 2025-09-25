@@ -1,3 +1,11 @@
+# Core HTTP & HTML parsing
 requests==2.32.3
 beautifulsoup4==4.12.3
+lxml
+
+# Env & email helpers
 python-dotenv==1.0.1
+
+# News feed parsing
+feedparser
+python-dateutil
