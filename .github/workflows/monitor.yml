@@ -1,31 +1,76 @@
-name: Run Aviron Monitors
+name: Run Aviron Monitors (Biweekly Monday 9am Toronto)
 
 on:
+  # Fire at both 13:00 and 14:00 UTC every Monday.
+  # 13:00 UTC == 9:00 AM Toronto during DST
+  # 14:00 UTC == 9:00 AM Toronto during Standard Time
   schedule:
-    # 1st & 15th of each month at 14:00 UTC (~biweekly)
-    - cron: "0 14 1,15 * *"
-  workflow_dispatch:  # lets you run it manually
+    - cron: "0 13 * * 1"
+    - cron: "0 14 * * 1"
+  workflow_dispatch:
 
 permissions:
-  contents: write   # allows committing updated history files
+  contents: write
 
 jobs:
   run-scripts:
     runs-on: ubuntu-latest
+    env:
+      # Monday before the next presentation: Oct 6, 2025
+      REFERENCE_MONDAY: "2025-10-06"
+      TZ: "America/Toronto"
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - name: Local-time + biweekly checks
+        id: gate
+        shell: bash
+        run: |
+          # 1) Must be 9:00 local (America/Toronto)
+          NOW_LOCAL_HOUR=$(date +%H)
+          if [ "$NOW_LOCAL_HOUR" -ne 09 ]; then
+            echo "Not 9am Toronto (hour=$NOW_LOCAL_HOUR). Skipping."
+            echo "run=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # 2) Biweekly parity since REFERENCE_MONDAY
+          REF="$REFERENCE_MONDAY"
+          TODAY=$(date +%Y-%m-%d)
+          REF_S=$(date -d "$REF" +%s)
+          TODAY_S=$(date -d "$TODAY" +%s)
+          DIFF_DAYS=$(( (TODAY_S - REF_S) / 86400 ))
+          WEEKS=$(( DIFF_DAYS / 7 ))
+
+          if [ $((WEEKS % 2)) -ne 0 ]; then
+            echo "Off-week (weeks since ref=$WEEKS). Skipping."
+            echo "run=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          echo "On-week (weeks since ref=$WEEKS) at 9am local. Proceeding."
+          echo "run=true" >> $GITHUB_OUTPUT
+
+      - name: Stop early if not scheduled week/hour
+        if: steps.gate.outputs.run != 'true'
+        run: echo "Gated off."
+
+      - name: Set up Python
+        if: steps.gate.outputs.run == 'true'
+        uses: actions/setup-python@v5
         with:
           python-version: "3.10"
 
       - name: Install dependencies
+        if: steps.gate.outputs.run == 'true'
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
       - name: Run monitors
+        if: steps.gate.outputs.run == 'true'
         env:
           EMAIL_HOST: ${{ secrets.EMAIL_HOST }}
           EMAIL_PORT: ${{ secrets.EMAIL_PORT }}
@@ -33,6 +78,7 @@ jobs:
           EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
           EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
           EMAIL_TO:   ${{ secrets.EMAIL_TO }}
+
           DEFAULT_CURRENCY: USD
           NORMALIZE_REGEX: '[^0-9\.]'
           STRIP_UTM: "1"
@@ -41,6 +87,7 @@ jobs:
         run: python run_all.py
 
       - name: Commit updated history files
+        if: steps.gate.outputs.run == 'true'
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
