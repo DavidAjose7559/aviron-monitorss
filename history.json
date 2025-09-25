@@ -1,0 +1,83 @@
+{
+  "https://www.onepeloton.com/shop/bike-plus": [
+    {
+      "ts": "2025-09-25T19:06:04+00:00",
+      "competitor": "Peloton",
+      "product_name": "Bike+",
+      "amount": 1445.0,
+      "currency": "USD"
+    }
+  ],
+  "https://www.onepeloton.com/bike": [
+    {
+      "ts": "2025-09-25T19:06:04+00:00",
+      "competitor": "Peloton",
+      "product_name": "Bike",
+      "amount": 1445.0,
+      "currency": "USD"
+    }
+  ],
+  "https://www.onepeloton.com/row": [
+    {
+      "ts": "2025-09-25T19:06:05+00:00",
+      "competitor": "Peloton",
+      "product_name": "Rower",
+      "amount": 3295.0,
+      "currency": "USD"
+    }
+  ],
+  "https://www.onepeloton.com/tread": [
+    {
+      "ts": "2025-09-25T19:06:05+00:00",
+      "competitor": "Peloton",
+      "product_name": "Treadmill",
+      "amount": 2995.0,
+      "currency": "USD"
+    }
+  ],
+  "https://hydrow.com/products/rowers/hydrow-rower/": [
+    {
+      "ts": "2025-09-25T19:06:06+00:00",
+      "competitor": "Hydrow",
+      "product_name": "Hydrow Origin Rower",
+      "amount": 1895.0,
+      "currency": "USD"
+    }
+  ],
+  "https://hydrow.com/products/rowers/hydrow-wave/": [
+    {
+      "ts": "2025-09-25T19:06:07+00:00",
+      "competitor": "Hydrow",
+      "product_name": "Hydrow Wave Rower",
+      "amount": 1995.0,
+      "currency": "USD"
+    }
+  ],
+  "https://hydrow.com/products/rowers/hydrow-arc-rower/": [
+    {
+      "ts": "2025-09-25T19:06:08+00:00",
+      "competitor": "Hydrow",
+      "product_name": "Hydrow Arc Rower",
+      "amount": 2295.0,
+      "currency": "USD"
+    }
+  ],
+  "https://ergatta.com/products/the-ergatta-rower": [
+    {
+      "ts": "2025-09-25T19:06:09+00:00",
+      "competitor": "Ergatta",
+      "product_name": "Ergatta Rower",
+      "amount": 2099.0,
+      "currency": "USD"
+    }
+  ],
+  "https://ergatta.com/products/ergatta-lite": [
+    {
+      "ts": "2025-09-25T19:06:10+00:00",
+      "competitor": "Ergatta",
+      "product_name": "Ergatta Lite Rower",
+      "amount": 1499.0,
+      "currency": "USD"
+    }
+  ]
+}

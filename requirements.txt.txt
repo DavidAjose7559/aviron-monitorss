@@ -1,0 +1,15 @@
+# Core HTTP & HTML parsing
+requests
+beautifulsoup4
+lxml
+
+# Env & email helpers
+python-dotenv
+
+# News feed parsing
+feedparser
+python-dateutil
+
+# (Optional but recommended)
+# If you ever work with pandas for CSV/JSON reports
+# pandas

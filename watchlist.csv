@@ -1,0 +1,11 @@
+competitor,product_name,product_url,price_selector_css,price_attribute,currency,notes,
+Peloton,Bike+,https://www.onepeloton.com/shop/bike-plus,meta[itemprop=price],content,USD,Example: meta[itemprop=price], attribute=content
+Peloton,Bike,https://www.onepeloton.com/shop/bike,meta[itemprop=price],content,USD,,
+Peloton,Rower,https://www.onepeloton.com/shop/row,meta[itemprop=price],content,USD,,
+Peloton,Treadmill,https://www.onepeloton.com/shop/tread,meta[itemprop=price],content,USD,Tread,
+Peloton,Treadmill Plus,https://www.onepeloton.com/shop/tread-plus,meta[itemprop=price],content,USD,Tread,
+Hydrow,Hydrow Origin Rower,https://hydrow.com/products/rowers/hydrow-rower/,meta[itemprop=price],content,USD,If price is in a meta tag, set attribute to 'content'
+Hydrow,Hydrow Wave Rower,https://hydrow.com/products/rowers/hydrow-wave/,meta[itemprop=price],content,USD,If price is in a meta tag, set attribute to 'content'
+Hydrow,Hydrow Arc Rower,https://hydrow.com/products/rowers/hydrow-arc-rower/,meta[itemprop=price],content,USD,If price is in a meta tag, set attribute to 'content'
+Ergatta,Ergatta Rower,https://ergatta.com/products/the-ergatta-rower,meta[itemprop=price],content,USD,Look for a data-price attribute if the price text isn't visible,
+Ergatta,Ergatta Lite Rower,https://ergatta.com/products/ergatta-lite,meta[itemprop=price],content,USD,Look for a data-price attribute if the price text isn't visible,
