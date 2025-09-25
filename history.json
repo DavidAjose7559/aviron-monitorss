@@ -27,6 +27,13 @@
       "product_name": "Bike+",
       "amount": 1445.0,
       "currency": "USD"
+    },
+    {
+      "ts": "2025-09-25T23:17:10+00:00",
+      "competitor": "Peloton",
+      "product_name": "Bike+",
+      "amount": 1445.0,
+      "currency": "USD"
     }
   ],
   "https://www.onepeloton.com/bike": [
@@ -132,6 +139,13 @@
       "product_name": "Ergatta Rower",
       "amount": 2099.0,
       "currency": "USD"
+    },
+    {
+      "ts": "2025-09-25T23:20:35+00:00",
+      "competitor": "Ergatta",
+      "product_name": "Ergatta Rower",
+      "amount": 2099.0,
+      "currency": "USD"
     }
   ],
   "https://ergatta.com/products/ergatta-lite": [
@@ -162,6 +176,13 @@
       "product_name": "Ergatta Lite Rower",
       "amount": 1499.0,
       "currency": "USD"
+    },
+    {
+      "ts": "2025-09-25T23:20:38+00:00",
+      "competitor": "Ergatta",
+      "product_name": "Ergatta Lite Rower",
+      "amount": 1499.0,
+      "currency": "USD"
     }
   ],
   "https://www.onepeloton.com/shop/bike": [
@@ -181,6 +202,13 @@
     },
     {
       "ts": "2025-09-25T23:03:56+00:00",
+      "competitor": "Peloton",
+      "product_name": "Bike",
+      "amount": 1445.0,
+      "currency": "USD"
+    },
+    {
+      "ts": "2025-09-25T23:17:13+00:00",
       "competitor": "Peloton",
       "product_name": "Bike",
       "amount": 1445.0,
@@ -208,6 +236,13 @@
       "product_name": "Rower",
       "amount": 3295.0,
       "currency": "USD"
+    },
+    {
+      "ts": "2025-09-25T23:17:16+00:00",
+      "competitor": "Peloton",
+      "product_name": "Rower",
+      "amount": 3295.0,
+      "currency": "USD"
     }
   ],
   "https://www.onepeloton.com/shop/tread": [
@@ -231,6 +266,13 @@
       "product_name": "Treadmill",
       "amount": 2995.0,
       "currency": "USD"
+    },
+    {
+      "ts": "2025-09-25T23:17:19+00:00",
+      "competitor": "Peloton",
+      "product_name": "Treadmill",
+      "amount": 2995.0,
+      "currency": "USD"
     }
   ],
   "https://www.onepeloton.com/shop/tread-plus": [
@@ -250,6 +292,13 @@
     },
     {
       "ts": "2025-09-25T23:03:57+00:00",
+      "competitor": "Peloton",
+      "product_name": "Treadmill Plus",
+      "amount": 2995.0,
+      "currency": "USD"
+    },
+    {
+      "ts": "2025-09-25T23:17:22+00:00",
       "competitor": "Peloton",
       "product_name": "Treadmill Plus",
       "amount": 2995.0,
