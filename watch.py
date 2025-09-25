@@ -47,7 +47,7 @@ MIN_PRICE_FLOOR = float(os.getenv("MIN_PRICE_FLOOR", "400"))
 
 # Polite crawling / retry
 _LAST_FETCH = {}            # domain -> last fetch time
-MIN_DOMAIN_GAP = 3.0        # seconds between same-domain requests
+MIN_DOMAIN_GAP = 12.0        # seconds between same-domain requests
 MAX_TRIES = 5               # retries on 429/5xx
 
 
