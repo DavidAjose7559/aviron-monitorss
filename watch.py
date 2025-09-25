@@ -47,7 +47,7 @@ MIN_PRICE_FLOOR = float(os.getenv("MIN_PRICE_FLOOR", "400"))
 
 # Polite crawling / retry
 _LAST_FETCH = {}            # domain -> last fetch time
-MIN_DOMAIN_GAP = 12.0        # seconds between same-domain requests
+MIN_DOMAIN_GAP = 60.0        # seconds between same-domain requests
 MAX_TRIES = 5               # retries on 429/5xx
 
 
@@ -82,8 +82,9 @@ def _throttle(url: str):
     now = time.time()
     last = _LAST_FETCH.get(dom, 0)
     gap = now - last
-    if gap < MIN_DOMAIN_GAP:
-        time.sleep(MIN_DOMAIN_GAP - gap)
+    wait = MIN_DOMAIN_GAP - gap + random.uniform(-5, 5)  # +/- 5s jitter
+    if wait > 0:
+        time.sleep(wait)
     _LAST_FETCH[dom] = time.time()
 
 
