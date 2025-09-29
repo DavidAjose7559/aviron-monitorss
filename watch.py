@@ -4,14 +4,12 @@ from datetime import datetime, timezone, timedelta
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from email.mime.text import MIMEText
-from urllib.parse import urlsplit, urlunsplit, parse_qsl, urlencode, quote
+from urllib.parse import urlsplit, urlunsplit, parse_qsl, urlencode, quote as urlquote
 
 # =======================
 # Config / ENV
 # =======================
 load_dotenv()
-SCRAPERAPI_KEY = os.getenv("SCRAPERAPI_KEY", "")
-
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36 Aviron-Price-Monitor",
@@ -47,10 +45,13 @@ STRIP_UTM = os.getenv("STRIP_UTM", "1") == "1"
 # Optional: floor for final fallback (avoid picking monthly fees etc.)
 MIN_PRICE_FLOOR = float(os.getenv("MIN_PRICE_FLOOR", "400"))
 
+# Scraper API (Hydrow only)
+SCRAPERAPI_KEY = os.getenv("SCRAPERAPI_KEY", "").strip()
+
 # Polite crawling / retry
-_LAST_FETCH = {}            # domain -> last fetch time
-MIN_DOMAIN_GAP = 3.0        # seconds between same-domain requests
-MAX_TRIES = 3               # retries on 429/5xx
+_LAST_FETCH = {}             # domain -> last fetch time
+MIN_DOMAIN_GAP = float(os.getenv("MIN_DOMAIN_GAP", "3.0"))  # seconds between same-domain requests
+MAX_TRIES = 5                # retries on 429/5xx
 
 
 # =======================
@@ -80,29 +81,34 @@ def send_email(subject, body):
 # Utilities
 # =======================
 def _throttle(url: str):
+    """Small per-domain delay + a little jitter to be polite."""
     dom = urlsplit(url).netloc
     now = time.time()
     last = _LAST_FETCH.get(dom, 0)
     gap = now - last
-    wait = MIN_DOMAIN_GAP - gap + random.uniform(-5, 5)  # +/- 5s jitter
+    wait = MIN_DOMAIN_GAP - gap + random.uniform(-0.5, 0.8)  # ~±1s jitter
     if wait > 0:
         time.sleep(wait)
     _LAST_FETCH[dom] = time.time()
 
-from requests.utils import quote  # if not already imported
 
 def maybe_proxy(url: str) -> str:
-    """Use scraping proxy only for hydrow.com when a key is present."""
+    """
+    Route Hydrow pages through ScraperAPI when a key is present.
+    Everyone else goes direct.
+    """
     if SCRAPERAPI_KEY and "hydrow.com" in url:
-        return f"https://api.scraperapi.com/?api_key={SCRAPERAPI_KEY}&url={quote(url, safe='')}"
+        base = "https://api.scraperapi.com/"
+        # you can add &render=true if needed, but try plain first
+        return f"{base}?api_key={SCRAPERAPI_KEY}&url={urlquote(url, safe='')}"
     return url
 
 
 def http_get_with_backoff(url: str):
     delay = 2.0
     for attempt in range(1, MAX_TRIES + 1):
-        _throttle(url)  # keep this small (e.g., 2–3s)
-        target = maybe_proxy(url)   # <<<<< use proxy for hydrow.com
+        _throttle(url)
+        target = maybe_proxy(url)
         resp = requests.get(target, headers=HEADERS, timeout=45)
         if resp.status_code == 429:
             wait = delay + random.uniform(0, 1.5)
