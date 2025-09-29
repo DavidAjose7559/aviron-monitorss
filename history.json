@@ -1,2 +1,92 @@
 {
+  "https://www.onepeloton.com/shop/bike-plus": [
+    {
+      "ts": "2025-09-29T22:58:03+00:00",
+      "competitor": "Peloton",
+      "product_name": "Bike+",
+      "amount": 1445.0,
+      "currency": "USD"
+    }
+  ],
+  "https://www.onepeloton.com/shop/bike": [
+    {
+      "ts": "2025-09-29T22:58:07+00:00",
+      "competitor": "Peloton",
+      "product_name": "Bike",
+      "amount": 1445.0,
+      "currency": "USD"
+    }
+  ],
+  "https://www.onepeloton.com/shop/row": [
+    {
+      "ts": "2025-09-29T22:58:10+00:00",
+      "competitor": "Peloton",
+      "product_name": "Rower",
+      "amount": 3295.0,
+      "currency": "USD"
+    }
+  ],
+  "https://www.onepeloton.com/shop/tread": [
+    {
+      "ts": "2025-09-29T22:58:13+00:00",
+      "competitor": "Peloton",
+      "product_name": "Treadmill",
+      "amount": 2995.0,
+      "currency": "USD"
+    }
+  ],
+  "https://www.onepeloton.com/shop/tread-plus": [
+    {
+      "ts": "2025-09-29T22:58:16+00:00",
+      "competitor": "Peloton",
+      "product_name": "Treadmill Plus",
+      "amount": 2995.0,
+      "currency": "USD"
+    }
+  ],
+  "https://hydrow.com/products/rowers/hydrow-rower/": [
+    {
+      "ts": "2025-09-29T22:58:20+00:00",
+      "competitor": "Hydrow",
+      "product_name": "Hydrow Origin Rower",
+      "amount": 1895.0,
+      "currency": "USD"
+    }
+  ],
+  "https://hydrow.com/products/rowers/hydrow-wave/": [
+    {
+      "ts": "2025-09-29T22:58:27+00:00",
+      "competitor": "Hydrow",
+      "product_name": "Hydrow Wave Rower",
+      "amount": 1995.0,
+      "currency": "USD"
+    }
+  ],
+  "https://hydrow.com/products/rowers/hydrow-arc-rower/": [
+    {
+      "ts": "2025-09-29T22:58:40+00:00",
+      "competitor": "Hydrow",
+      "product_name": "Hydrow Arc Rower",
+      "amount": 2295.0,
+      "currency": "USD"
+    }
+  ],
+  "https://ergatta.com/products/the-ergatta-rower": [
+    {
+      "ts": "2025-09-29T22:58:40+00:00",
+      "competitor": "Ergatta",
+      "product_name": "Ergatta Rower",
+      "amount": 2099.0,
+      "currency": "USD"
+    }
+  ],
+  "https://ergatta.com/products/ergatta-lite": [
+    {
+      "ts": "2025-09-29T22:58:43+00:00",
+      "competitor": "Ergatta",
+      "product_name": "Ergatta Lite Rower",
+      "amount": 1499.0,
+      "currency": "USD"
+    }
+  ]
 }
