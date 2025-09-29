@@ -98,6 +98,7 @@ jobs:
           MIN_PRICE_FLOOR: "400"
 
           NEWS_LOOKBACK_DAYS: "14"
+          SCRAPERAPI_KEY: ${{ secrets.SCRAPERAPI_KEY }}
         run: python run_all.py
 
       - name: Commit updated history files
