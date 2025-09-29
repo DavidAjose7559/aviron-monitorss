@@ -13,6 +13,13 @@
       "product_name": "Bike+",
       "amount": 1445.0,
       "currency": "USD"
+    },
+    {
+      "ts": "2025-09-29T18:52:36+00:00",
+      "competitor": "Peloton",
+      "product_name": "Bike+",
+      "amount": 1445.0,
+      "currency": "USD"
     }
   ],
   "https://www.onepeloton.com/shop/bike": [
@@ -25,6 +32,13 @@
     },
     {
       "ts": "2025-09-25T23:37:53+00:00",
+      "competitor": "Peloton",
+      "product_name": "Bike",
+      "amount": 1445.0,
+      "currency": "USD"
+    },
+    {
+      "ts": "2025-09-29T18:52:36+00:00",
       "competitor": "Peloton",
       "product_name": "Bike",
       "amount": 1445.0,
@@ -45,6 +59,13 @@
       "product_name": "Rower",
       "amount": 3295.0,
       "currency": "USD"
+    },
+    {
+      "ts": "2025-09-29T18:52:37+00:00",
+      "competitor": "Peloton",
+      "product_name": "Rower",
+      "amount": 3295.0,
+      "currency": "USD"
     }
   ],
   "https://www.onepeloton.com/shop/tread": [
@@ -57,6 +78,13 @@
     },
     {
       "ts": "2025-09-25T23:39:56+00:00",
+      "competitor": "Peloton",
+      "product_name": "Treadmill",
+      "amount": 2995.0,
+      "currency": "USD"
+    },
+    {
+      "ts": "2025-09-29T18:52:37+00:00",
       "competitor": "Peloton",
       "product_name": "Treadmill",
       "amount": 2995.0,
@@ -77,6 +105,13 @@
       "product_name": "Treadmill Plus",
       "amount": 2995.0,
       "currency": "USD"
+    },
+    {
+      "ts": "2025-09-29T18:52:39+00:00",
+      "competitor": "Peloton",
+      "product_name": "Treadmill Plus",
+      "amount": 2995.0,
+      "currency": "USD"
     }
   ],
   "https://ergatta.com/products/the-ergatta-rower": [
@@ -93,6 +128,13 @@
       "product_name": "Ergatta Rower",
       "amount": 2099.0,
       "currency": "USD"
+    },
+    {
+      "ts": "2025-09-29T18:53:38+00:00",
+      "competitor": "Ergatta",
+      "product_name": "Ergatta Rower",
+      "amount": 2099.0,
+      "currency": "USD"
     }
   ],
   "https://ergatta.com/products/ergatta-lite": [
@@ -105,6 +147,13 @@
     },
     {
       "ts": "2025-09-25T23:56:34+00:00",
+      "competitor": "Ergatta",
+      "product_name": "Ergatta Lite Rower",
+      "amount": 1499.0,
+      "currency": "USD"
+    },
+    {
+      "ts": "2025-09-29T18:53:44+00:00",
       "competitor": "Ergatta",
       "product_name": "Ergatta Lite Rower",
       "amount": 1499.0,
