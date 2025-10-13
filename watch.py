@@ -45,14 +45,19 @@ STRIP_UTM = os.getenv("STRIP_UTM", "1") == "1"
 # Optional: floor for final fallback (avoid picking monthly fees etc.)
 MIN_PRICE_FLOOR = float(os.getenv("MIN_PRICE_FLOOR", "400"))
 
-# Scraper API (Hydrow only)
-SCRAPERAPI_KEY = os.getenv("SCRAPERAPI_KEY", "").strip()
+# ScraperAPI settings
+SCRAPERAPI_KEY    = os.getenv("SCRAPERAPI_KEY", "").strip()
+SCRAPERAPI_RENDER = os.getenv("SCRAPERAPI_RENDER", "1") == "1"  # default ON for JS-heavy pages
+SCRAPERAPI_DEBUG  = os.getenv("SCRAPERAPI_DEBUG", "0") == "1"
+PROXY_DOMAINS = tuple(d.strip().lower() for d in os.getenv(
+    "SCRAPERAPI_DOMAINS",
+    "hydrow.com,onepeloton.com,shop.onepeloton.com"
+).split(",") if d.strip())
 
 # Polite crawling / retry
-_LAST_FETCH = {}             # domain -> last fetch time
+_LAST_FETCH = {}                                  # domain -> last fetch time
 MIN_DOMAIN_GAP = float(os.getenv("MIN_DOMAIN_GAP", "3.0"))  # seconds between same-domain requests
-MAX_TRIES = 5                # retries on 429/5xx
-
+MAX_TRIES = 5                                     # retries on 429/5xx
 
 # =======================
 # Email helper
@@ -76,7 +81,6 @@ def send_email(subject, body):
         s.login(EMAIL_USER, EMAIL_PASS)
         s.sendmail(EMAIL_FROM, recipients, msg.as_string())
 
-
 # =======================
 # Utilities
 # =======================
@@ -91,25 +95,41 @@ def _throttle(url: str):
         time.sleep(wait)
     _LAST_FETCH[dom] = time.time()
 
+def _needs_proxy(url: str) -> bool:
+    host = urlsplit(url).netloc.lower()
+    return SCRAPERAPI_KEY and any(dom in host for dom in PROXY_DOMAINS)
 
 def maybe_proxy(url: str) -> str:
     """
-    Route Hydrow pages through ScraperAPI when a key is present.
-    Everyone else goes direct.
+    Route selected domains through ScraperAPI if a key is available.
+    - Keeps headers (some sites price by UA/locale)
+    - Optional render=true for JS content
     """
-    if SCRAPERAPI_KEY and "hydrow.com" in url:
-        base = "https://api.scraperapi.com/"
-        # you can add &render=true if needed, but try plain first
-        return f"{base}?api_key={SCRAPERAPI_KEY}&url={urlquote(url, safe='')}"
+    if _needs_proxy(url):
+        params = [
+            ("api_key", SCRAPERAPI_KEY),
+            ("keep_headers", "true"),
+            ("country", "us"),
+            ("url", urlquote(url, safe="")),
+        ]
+        if SCRAPERAPI_RENDER:
+            params.insert(1, ("render", "true"))
+        query = "&".join(f"{k}={v}" for k, v in params)
+        prox = f"https://api.scraperapi.com/?{query}"
+        if SCRAPERAPI_DEBUG:
+            print(f"[proxy] {url} -> {prox[:120]}...")
+        return prox
     return url
-
 
 def http_get_with_backoff(url: str):
     delay = 2.0
     for attempt in range(1, MAX_TRIES + 1):
         _throttle(url)
         target = maybe_proxy(url)
-        resp = requests.get(target, headers=HEADERS, timeout=45)
+        resp = requests.get(target, headers=HEADERS, timeout=60)
+        # If we proxied and got 401 from ScraperAPI, it's almost always a bad/missing key.
+        if resp.status_code == 401 and _needs_proxy(url):
+            raise ValueError("ScraperAPI 401 Unauthorized (check SCRAPERAPI_KEY secret)")
         if resp.status_code == 429:
             wait = delay + random.uniform(0, 1.5)
             print(f"[throttle] 429 from {url} — retry {attempt}/{MAX_TRIES} after {wait:.1f}s")
@@ -126,7 +146,6 @@ def http_get_with_backoff(url: str):
         return resp
     raise ValueError(f"Too Many Requests / server errors after {MAX_TRIES} tries for {url}")
 
-
 def norm_price(text, regex=DEFAULT_REGEX):
     if text is None:
         return None
@@ -138,7 +157,6 @@ def norm_price(text, regex=DEFAULT_REGEX):
     except ValueError:
         return None
 
-
 def normalize_url(u: str) -> str:
     if not u or not STRIP_UTM:
         return u
@@ -149,7 +167,6 @@ def normalize_url(u: str) -> str:
         return urlunsplit(parts)
     except Exception:
         return u
-
 
 def extract_price(url, selector, attr="inner_text", regex=DEFAULT_REGEX, product_hint=None):
     """Extract a price using selector -> JSON-LD -> Peloton-aware fallback -> final largest-$ fallback."""
@@ -232,14 +249,12 @@ def extract_price(url, selector, attr="inner_text", regex=DEFAULT_REGEX, product
 
     raise ValueError("Selector not found and no fallback price detected")
 
-
 def load_history():
     try:
         with open(HISTORY_FILE, "r", encoding="utf-8") as f:
             return json.load(f)
     except (FileNotFoundError, json.JSONDecodeError, OSError):
         return {}
-
 
 def save_history(data):
     tmp = HISTORY_FILE + ".tmp"
@@ -250,7 +265,6 @@ def save_history(data):
     except Exception:
         with open(HISTORY_FILE, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2)
-
 
 # =======================
 # Main
@@ -352,7 +366,6 @@ def main():
     body = "\n".join(lines).rstrip()
     send_email(subject=subject, body=body)
     print(f"Sent digest with {total_items} item(s).")
-
 
 if __name__ == "__main__":
     main()
