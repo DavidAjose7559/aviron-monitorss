@@ -1,0 +1,56 @@
+name: Run Price Monitor (Weekly Monday 9am Toronto)
+
+on:
+  schedule:
+    # Every Monday 9am Toronto (13:00 UTC)
+    - cron: "0 13 * * 1"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Run price monitor manually"
+        required: false
+        default: "false"
+
+permissions:
+  contents: write
+
+jobs:
+  run-price:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run price monitor
+        env:
+          EMAIL_HOST: ${{ secrets.EMAIL_HOST }}
+          EMAIL_PORT: ${{ secrets.EMAIL_PORT }}
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          EMAIL_TO:   ${{ secrets.EMAIL_TO }}
+          DEFAULT_CURRENCY: USD
+          NORMALIZE_REGEX: '[^0-9\.]'
+          STRIP_UTM: "1"
+          MIN_PRICE_FLOOR: "400"
+          SCRAPERAPI_KEY: ${{ secrets.SCRAPERAPI_KEY }}
+        run: python watch.py
+
+      - name: Commit updated price history
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add history.json || true
+          git diff --staged --quiet || git commit -m "Update price history [skip ci]"
+          git push
