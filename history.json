@@ -66,6 +66,13 @@
       "product_name": "Rower",
       "amount": 3495.0,
       "currency": "USD"
+    },
+    {
+      "ts": "2025-10-13T15:06:57+00:00",
+      "competitor": "Peloton",
+      "product_name": "Rower",
+      "amount": 3495.0,
+      "currency": "USD"
     }
   ],
   "https://www.onepeloton.com/shop/tread": [
@@ -85,6 +92,13 @@
     },
     {
       "ts": "2025-10-06T16:47:45+00:00",
+      "competitor": "Peloton",
+      "product_name": "Treadmill",
+      "amount": 3295.0,
+      "currency": "USD"
+    },
+    {
+      "ts": "2025-10-13T15:07:43+00:00",
       "competitor": "Peloton",
       "product_name": "Treadmill",
       "amount": 3295.0,
@@ -211,6 +225,13 @@
       "product_name": "Ergatta Rower",
       "amount": 2099.0,
       "currency": "USD"
+    },
+    {
+      "ts": "2025-10-13T15:30:39+00:00",
+      "competitor": "Ergatta",
+      "product_name": "Ergatta Rower",
+      "amount": 2099.0,
+      "currency": "USD"
     }
   ],
   "https://ergatta.com/products/ergatta-lite": [
@@ -237,6 +258,13 @@
     },
     {
       "ts": "2025-10-13T13:21:22+00:00",
+      "competitor": "Ergatta",
+      "product_name": "Ergatta Lite Rower",
+      "amount": 1499.0,
+      "currency": "USD"
+    },
+    {
+      "ts": "2025-10-13T15:30:42+00:00",
       "competitor": "Ergatta",
       "product_name": "Ergatta Lite Rower",
       "amount": 1499.0,
