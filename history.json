@@ -230,6 +230,13 @@
       "product_name": "Bike+",
       "amount": 6695.0,
       "currency": "USD"
+    },
+    {
+      "ts": "2026-03-16T14:22:15+00:00",
+      "competitor": "Peloton",
+      "product_name": "Bike+",
+      "amount": 6695.0,
+      "currency": "USD"
     }
   ],
   "https://www.onepeloton.com/shop/bike": [
@@ -459,6 +466,13 @@
     },
     {
       "ts": "2026-03-09T14:08:47+00:00",
+      "competitor": "Peloton",
+      "product_name": "Bike",
+      "amount": 6695.0,
+      "currency": "USD"
+    },
+    {
+      "ts": "2026-03-16T14:22:18+00:00",
       "competitor": "Peloton",
       "product_name": "Bike",
       "amount": 6695.0,
@@ -696,6 +710,13 @@
       "product_name": "Rower",
       "amount": 6695.0,
       "currency": "USD"
+    },
+    {
+      "ts": "2026-03-16T14:22:22+00:00",
+      "competitor": "Peloton",
+      "product_name": "Rower",
+      "amount": 6695.0,
+      "currency": "USD"
     }
   ],
   "https://www.onepeloton.com/shop/tread": [
@@ -925,6 +946,13 @@
     },
     {
       "ts": "2026-03-09T14:08:53+00:00",
+      "competitor": "Peloton",
+      "product_name": "Treadmill",
+      "amount": 6695.0,
+      "currency": "USD"
+    },
+    {
+      "ts": "2026-03-16T14:22:24+00:00",
       "competitor": "Peloton",
       "product_name": "Treadmill",
       "amount": 6695.0,
@@ -1162,6 +1190,13 @@
       "product_name": "Treadmill Plus",
       "amount": 6695.0,
       "currency": "USD"
+    },
+    {
+      "ts": "2026-03-16T14:22:28+00:00",
+      "competitor": "Peloton",
+      "product_name": "Treadmill Plus",
+      "amount": 6695.0,
+      "currency": "USD"
     }
   ],
   "https://hydrow.com/products/rowers/hydrow-rower/": [
@@ -1395,6 +1430,13 @@
       "product_name": "Hydrow Origin Rower",
       "amount": 1895.0,
       "currency": "USD"
+    },
+    {
+      "ts": "2026-03-16T14:22:28+00:00",
+      "competitor": "Hydrow",
+      "product_name": "Hydrow Origin Rower",
+      "amount": 1895.0,
+      "currency": "USD"
     }
   ],
   "https://hydrow.com/products/rowers/hydrow-wave/": [
@@ -1617,6 +1659,13 @@
     },
     {
       "ts": "2026-03-09T14:09:13+00:00",
+      "competitor": "Hydrow",
+      "product_name": "Hydrow Wave Rower",
+      "amount": 1995.0,
+      "currency": "USD"
+    },
+    {
+      "ts": "2026-03-16T14:22:33+00:00",
       "competitor": "Hydrow",
       "product_name": "Hydrow Wave Rower",
       "amount": 1995.0,
@@ -1854,6 +1903,13 @@
       "product_name": "Hydrow Arc Rower",
       "amount": 2295.0,
       "currency": "USD"
+    },
+    {
+      "ts": "2026-03-16T14:22:36+00:00",
+      "competitor": "Hydrow",
+      "product_name": "Hydrow Arc Rower",
+      "amount": 2295.0,
+      "currency": "USD"
     }
   ],
   "https://ergatta.com/products/the-ergatta-rower": [
@@ -2083,6 +2139,13 @@
     },
     {
       "ts": "2026-03-09T14:09:19+00:00",
+      "competitor": "Ergatta",
+      "product_name": "Ergatta Rower",
+      "amount": 2199.0,
+      "currency": "USD"
+    },
+    {
+      "ts": "2026-03-16T14:22:36+00:00",
       "competitor": "Ergatta",
       "product_name": "Ergatta Rower",
       "amount": 2199.0,
@@ -2320,6 +2383,13 @@
       "product_name": "Ergatta Lite Rower",
       "amount": 1699.0,
       "currency": "USD"
+    },
+    {
+      "ts": "2026-03-16T14:22:40+00:00",
+      "competitor": "Ergatta",
+      "product_name": "Ergatta Lite Rower",
+      "amount": 1699.0,
+      "currency": "USD"
     }
   ],
   "https://www.nordictrack.com/ca/product/rw900-rower": [
@@ -2535,6 +2605,13 @@
     },
     {
       "ts": "2026-03-09T14:09:22+00:00",
+      "competitor": "NordicTrack",
+      "product_name": "RW900 Rower",
+      "amount": 2999.99,
+      "currency": "USD"
+    },
+    {
+      "ts": "2026-03-16T14:22:40+00:00",
       "competitor": "NordicTrack",
       "product_name": "RW900 Rower",
       "amount": 2999.99,
@@ -2758,6 +2835,13 @@
       "product_name": "RW700 Rower",
       "amount": 2999.99,
       "currency": "USD"
+    },
+    {
+      "ts": "2026-03-16T14:22:43+00:00",
+      "competitor": "NordicTrack",
+      "product_name": "RW700 Rower",
+      "amount": 2999.99,
+      "currency": "USD"
     }
   ],
   "https://www.nordictrack.com/ca/product/x24-treadmill": [
@@ -2973,6 +3057,13 @@
     },
     {
       "ts": "2026-03-09T14:09:28+00:00",
+      "competitor": "NordicTrack",
+      "product_name": "X24 Treadmill",
+      "amount": 5499.99,
+      "currency": "USD"
+    },
+    {
+      "ts": "2026-03-16T14:22:45+00:00",
       "competitor": "NordicTrack",
       "product_name": "X24 Treadmill",
       "amount": 5499.99,
@@ -3196,6 +3287,13 @@
       "product_name": "X16 Treadmill",
       "amount": 5499.99,
       "currency": "USD"
+    },
+    {
+      "ts": "2026-03-16T14:22:49+00:00",
+      "competitor": "NordicTrack",
+      "product_name": "X16 Treadmill",
+      "amount": 5499.99,
+      "currency": "USD"
     }
   ],
   "https://www.nordictrack.com/ca/product/c-2450-treadmill": [
@@ -3411,6 +3509,13 @@
     },
     {
       "ts": "2026-03-09T14:09:36+00:00",
+      "competitor": "NordicTrack",
+      "product_name": "C 2450 Treadmill",
+      "amount": 3999.99,
+      "currency": "USD"
+    },
+    {
+      "ts": "2026-03-16T14:22:52+00:00",
       "competitor": "NordicTrack",
       "product_name": "C 2450 Treadmill",
       "amount": 3999.99,
@@ -3634,6 +3739,13 @@
       "product_name": "C 1750 Treadmill",
       "amount": 3999.99,
       "currency": "USD"
+    },
+    {
+      "ts": "2026-03-16T14:22:54+00:00",
+      "competitor": "NordicTrack",
+      "product_name": "C 1750 Treadmill",
+      "amount": 3999.99,
+      "currency": "USD"
     }
   ],
   "https://www.nordictrack.com/ca/product/c-1250-treadmill": [
@@ -3849,6 +3961,13 @@
     },
     {
       "ts": "2026-03-09T14:09:42+00:00",
+      "competitor": "NordicTrack",
+      "product_name": "C 1250 Treadmill",
+      "amount": 3999.99,
+      "currency": "USD"
+    },
+    {
+      "ts": "2026-03-16T14:22:58+00:00",
       "competitor": "NordicTrack",
       "product_name": "C 1250 Treadmill",
       "amount": 3999.99,
@@ -4072,6 +4191,13 @@
       "product_name": "T Series 10 Treadmill",
       "amount": 2700.0,
       "currency": "USD"
+    },
+    {
+      "ts": "2026-03-16T14:23:02+00:00",
+      "competitor": "NordicTrack",
+      "product_name": "T Series 10 Treadmill",
+      "amount": 2700.0,
+      "currency": "USD"
     }
   ],
   "https://echelonfit.ca/products/echelon-row-s-connected-rowing-machine": [
@@ -4287,6 +4413,13 @@
     },
     {
       "ts": "2026-03-09T14:09:45+00:00",
+      "competitor": "Echelon",
+      "product_name": "Row-s Rower",
+      "amount": 999.99,
+      "currency": "USD"
+    },
+    {
+      "ts": "2026-03-16T14:23:02+00:00",
       "competitor": "Echelon",
       "product_name": "Row-s Rower",
       "amount": 999.99,
@@ -4510,6 +4643,13 @@
       "product_name": "Stride-6 Treadmill",
       "amount": 1999.99,
       "currency": "USD"
+    },
+    {
+      "ts": "2026-03-16T14:23:06+00:00",
+      "competitor": "Echelon",
+      "product_name": "Stride-6 Treadmill",
+      "amount": 1999.99,
+      "currency": "USD"
     }
   ],
   "https://echelonfit.ca/products/stride-6s-10": [
@@ -4725,6 +4865,13 @@
     },
     {
       "ts": "2026-03-09T14:09:52+00:00",
+      "competitor": "Echelon",
+      "product_name": "Stride-6s-10 Treadmill",
+      "amount": 2499.99,
+      "currency": "USD"
+    },
+    {
+      "ts": "2026-03-16T14:23:09+00:00",
       "competitor": "Echelon",
       "product_name": "Stride-6s-10 Treadmill",
       "amount": 2499.99,
@@ -4948,6 +5095,13 @@
       "product_name": "Stride-8s Treadmill",
       "amount": 2999.99,
       "currency": "USD"
+    },
+    {
+      "ts": "2026-03-16T14:23:12+00:00",
+      "competitor": "Echelon",
+      "product_name": "Stride-8s Treadmill",
+      "amount": 2999.99,
+      "currency": "USD"
     }
   ],
   "https://echelonfit.ca/products/echelon-smart-connect-bike-ex3-indoor-cycling-fitness-bike": [
@@ -5163,6 +5317,13 @@
     },
     {
       "ts": "2026-03-09T14:09:58+00:00",
+      "competitor": "Echelon",
+      "product_name": "Connect EX-3 Bike",
+      "amount": 499.99,
+      "currency": "USD"
+    },
+    {
+      "ts": "2026-03-16T14:23:14+00:00",
       "competitor": "Echelon",
       "product_name": "Connect EX-3 Bike",
       "amount": 499.99,
@@ -5386,6 +5547,13 @@
       "product_name": "Connect EX-5 ( ECH01-EX5 ) Bike",
       "amount": 1299.99,
       "currency": "USD"
+    },
+    {
+      "ts": "2026-03-16T14:23:17+00:00",
+      "competitor": "Echelon",
+      "product_name": "Connect EX-5 ( ECH01-EX5 ) Bike",
+      "amount": 1299.99,
+      "currency": "USD"
     }
   ],
   "https://echelonfit.ca/products/echelon-connect-bike-ex-5s-22": [
@@ -5601,6 +5769,13 @@
     },
     {
       "ts": "2026-03-09T14:10:05+00:00",
+      "competitor": "Echelon",
+      "product_name": "Connect EX-5s-22 Bike",
+      "amount": 1899.99,
+      "currency": "USD"
+    },
+    {
+      "ts": "2026-03-16T14:23:20+00:00",
       "competitor": "Echelon",
       "product_name": "Connect EX-5s-22 Bike",
       "amount": 1899.99,
@@ -5824,6 +5999,13 @@
       "product_name": "Connect EX-30-RCX Bike",
       "amount": 899.99,
       "currency": "USD"
+    },
+    {
+      "ts": "2026-03-16T14:23:23+00:00",
+      "competitor": "Echelon",
+      "product_name": "Connect EX-30-RCX Bike",
+      "amount": 899.99,
+      "currency": "USD"
     }
   ],
   "https://echelonfit.ca/products/echelon-connect-sport": [
@@ -6039,6 +6221,13 @@
     },
     {
       "ts": "2026-03-09T14:10:11+00:00",
+      "competitor": "Echelon",
+      "product_name": "Connect Sport Bike",
+      "amount": 699.99,
+      "currency": "USD"
+    },
+    {
+      "ts": "2026-03-16T14:23:27+00:00",
       "competitor": "Echelon",
       "product_name": "Connect Sport Bike",
       "amount": 699.99,
